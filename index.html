@@ -328,6 +328,14 @@ blockquote cite{
 .ovcard.cur .i{color:rgba(255,255,255,.7)}
 .ovcard .t{font-size:12.5px;line-height:1.4;font-weight:500}
 
+/* short viewports (1366x768 laptops, windowed screen-share) get tighter chrome */
+@media (max-height:840px){
+  .slide{padding-bottom:clamp(62px,5.6vw,88px)}
+}
+/* auto-fit: the wrap scales down rather than ever being clipped.
+   No transition here - it must be in place before the slide is painted. */
+.wrap{transform-origin:center center}
+
 @media (max-width:900px){
   .split,.close-grid{grid-template-columns:1fr}
   .grid3,.nums,.flipgrid{grid-template-columns:1fr 1fr}
@@ -597,7 +605,11 @@ blockquote cite{
         <p class="lead" data-anim>
           I run on data, so I had assumed the advantage gets built at the table: know more, read faster, win. Thompson&rsquo;s point is that by the time you are in the room, the balance of power is already set &mdash; and what happens next is mostly the execution of preparation you either did or skipped. Which is an uncomfortable thing to hear if you have been quietly proud of improvising well.
         </p>
-        <div class="todo-block" data-anim>[ Chen: one concrete example of preparation you had skipped &mdash; in the drill, or in a real GLP negotiation you thought about while she said it. ]</div>
+        <div class="card" data-anim>
+          <span class="n">The specific thing I had skipped</span>
+          <p style="color:var(--text);font-weight:400">The other side&rsquo;s alternatives.</p>
+          <p>I am good at knowing my own numbers. I had almost never done the work of figuring out what happens to the person across the table if we do not do the deal &mdash; which is the number that actually sets the price. Fifteen years of thinking I had an information advantage, built on information that was only ever half the board.</p>
+        </div>
       </div>
       <div class="stack">
         <p class="small" data-anim style="letter-spacing:.16em;text-transform:uppercase;font-size:11px;color:var(--faint)">The frameworks we were drilled on</p>
@@ -739,15 +751,19 @@ blockquote cite{
 <!-- ============ 12 ONE CLASSMATE ============ -->
 <section class="slide" data-title="One classmate">
   <div class="wrap">
-    <div class="split">
+    <div class="kicker" data-anim>People, part two</div>
+    <h2 data-anim style="max-width:26ch">Navy. Faculty post. Business school.<br><span class="grad">Law school next.</span></h2>
+    <div class="split top" style="margin-top:clamp(16px,2vw,30px)">
       <div class="stack">
-        <div class="kicker" data-anim>People, part two</div>
-        <h2 data-anim>The career path that <span class="grad">made no sense</span> until he explained it</h2>
-        <p class="lead" data-anim>The most interesting thing in that room was never the job titles. It was how people got to them &mdash; the sideways moves, the restarts, the bets that looked reckless from outside and obvious from inside.</p>
-        <div class="todo-block" data-anim>[ Chen: who he is, where he started, where he is now, and the step in between that surprised you. Then: what it made you think about your own next step. ]</div>
-        <p class="small" data-anim>Last year&rsquo;s cohort: PhDs from Harvard Medical School, founders, operators from pharma, consumer goods, education and finance across four continents. Roughly the same mix this year.</p>
+        <p class="lead" data-anim>
+          One classmate: a serving naval officer who teaches at Northwestern. He got interested in finance, so he enrolled in the EMBA. After this he wants to go to law school.
+        </p>
+        <p class="lead" data-anim>
+          Said out loud in that order it sounds like indecision. Spend twenty minutes with him and it sounds like the most deliberate career in the room &mdash; and it made my own &ldquo;what do I become next&rdquo; question feel a great deal less dramatic.
+        </p>
+        <p class="small" data-anim>The most interesting thing in that room was never the job titles. It was how people got to them.</p>
       </div>
-      <div class="ph-slot" data-anim style="min-height:clamp(220px,32vh,420px)">[ photo slot &mdash; you and this person, or them in class ]</div>
+      <div class="ph-slot" data-anim style="min-height:clamp(200px,34vh,400px)">[ photo slot &mdash; you and this person, or them in class ]</div>
     </div>
   </div>
 </section>
@@ -857,7 +873,7 @@ blockquote cite{
     <div class="truths" style="margin-top:clamp(18px,2.4vw,34px)">
       <div class="truth" data-anim><div class="i">01</div><div><div class="t">Your English is probably fine. That was never the bar.</div><div class="s">Understanding the room is not the same as being in it. The bar is whether you will speak &mdash; whether you push into a discussion running in five accents at once instead of nodding along. A classroom that genuinely fuses cultures from all over the world is rare, and it only pays you back if you get in.</div></div></div>
       <div class="truth" data-anim><div class="i">02</div><div><div class="t">The load is attention, not language.</div><div class="s">Full days, back to back. You are listening hard to the professor and just as hard to 130 classmates arguing, all day, for eight days. That sustained concentration is the real cost &mdash; far more than the English.</div></div></div>
-      <div class="truth" data-anim><div class="i">03</div><div><div class="t">Nobody assigns you a team, so introduce yourself early</div><div class="s">Four courses, four reshuffles, no fixed group to hide inside. <span class="todo">[ Chen: your tactical advice &mdash; who to sit next to, what to open with ]</span></div></div></div>
+      <div class="truth" data-anim><div class="i">03</div><div><div class="t">Raise your hand on day one. Get it over with.</div><div class="s">Speak in the first session, before the room has settled into who talks and who does not. Once you have said something out loud, the rest of the eight days is easy. Wait until Wednesday and you will still be waiting on Friday.</div></div></div>
       <div class="truth" data-anim><div class="i">04</div><div><div class="t">My mistake: I optimised for the assignments</div><div class="s">Jet lag plus doing the homework properly meant I skipped the evening drinks. Operations had just spent two days teaching us that every choice is a trade-off &mdash; and I made this one without ever admitting to myself that I was making it. The coursework was gradeable. The other thing was not. Do the reading on the plane.</div></div></div>
       <div class="truth" data-anim><div class="i">05</div><div><div class="t">Who should <em class="it">not</em> come</div><div class="s">Anyone who cannot go dark for eight consecutive days. If you have to stay reachable, you will be physically present and functionally absent &mdash; and with the groups reshuffling every course, everyone notices.</div></div></div>
       <div class="truth" data-anim><div class="i">06</div><div><div class="t">Was it worth it? I signed up for four global electives.</div><div class="s">Four is the maximum you are allowed to take. That is my honest answer &mdash; I did not go home and write a reflection, I went home and booked the next four countries.</div></div></div>
@@ -878,14 +894,15 @@ blockquote cite{
           <b style="color:var(--text)">Chen Gao &middot; 高晨</b><br>
           Guanghua&ndash;Kellogg EMBA, GK12<br>
           VP, Big Data &amp; AI, GLP<br>
-          <span class="todo">[ WeChat / email to display ]</span>
+          <span class="todo">[ LinkedIn URL ]</span><br>
+          <span class="todo">[ @gsm.pku.edu.cn email ]</span>
         </p>
       </div>
       <div class="stack" style="align-items:flex-end">
-        <figure data-anim style="width:clamp(140px,15vw,210px);aspect-ratio:9/16;max-height:34vh">
+        <figure data-anim style="width:clamp(150px,17vw,240px);aspect-ratio:9/16;max-height:40vh">
           <video src="assets/video/clip-625191413.mp4" muted loop playsinline preload="metadata"></video>
+          <figcaption>The mascot made it home too</figcaption>
         </figure>
-        <div class="qr" data-anim>[ WeChat QR<br>or GK admissions QR ]</div>
         <p class="small" data-anim style="text-align:right">Questions &mdash; ask me anything.<br>Especially the ones you think are too basic.</p>
       </div>
     </div>
@@ -991,8 +1008,30 @@ blockquote cite{
   /* ?static=1 - freeze everything at its end state, for screenshots / PDF export */
   var STATIC = /[?&]static/.test(location.search);
 
+  /* ---------- fit-to-viewport -------------------------------------------
+     A live share can run in any window size. Rather than let a text-heavy
+     slide get clipped, scale its content down like a real slide would.
+     --------------------------------------------------------------------- */
+  function fit(s){
+    var w = s.querySelector('.wrap');
+    if(!w) return;                      /* full-bleed slides handle themselves */
+    w.style.transform = 'none';
+    var cs = getComputedStyle(s);
+    var avail = s.clientHeight - parseFloat(cs.paddingTop) - parseFloat(cs.paddingBottom);
+    var need = w.scrollHeight;
+    if(need > avail && need > 0){
+      w.style.transform = 'scale(' + Math.max(.62, avail / need) + ')';
+    }
+  }
+  var fitT = null;
+  window.addEventListener('resize', function(){
+    clearTimeout(fitT);
+    fitT = setTimeout(function(){ fit(slides[i]); }, 120);
+  });
+
   /* ---------- per-slide entrance ---------- */
   function enter(s){
+    fit(s);
     var items = Array.prototype.slice.call(s.querySelectorAll('[data-anim]'));
     if(STATIC){
       items.forEach(function(el){ el.classList.add('in'); });
