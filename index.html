@@ -253,6 +253,21 @@ figcaption{
 .person .nm{font-size:clamp(12px,1.02vw,14.5px);font-weight:600;margin-bottom:3px}
 .person .rl{font-size:clamp(10px,.86vw,12px);color:var(--faint);line-height:1.5}
 
+/* ---------------- pull quote ---------------- */
+blockquote{
+  position:relative;padding-left:clamp(18px,2vw,32px);
+  border-left:2px solid transparent;
+  border-image:linear-gradient(to bottom,#F0655B,#9E82EE) 1;
+}
+blockquote .q{
+  font-family:var(--display);font-style:italic;font-weight:500;
+  font-size:clamp(20px,2.5vw,40px);line-height:1.22;letter-spacing:-.008em;
+}
+blockquote cite{
+  display:block;margin-top:clamp(10px,1.2vw,18px);font-style:normal;
+  font-size:clamp(10px,.88vw,12.5px);letter-spacing:.2em;text-transform:uppercase;color:var(--faint);
+}
+
 /* ---------------- 13 big statement ---------------- */
 .statement{text-align:center;align-items:center;justify-content:center}
 .statement .huge{
@@ -570,10 +585,13 @@ figcaption{
   <div class="wrap">
     <div class="split top">
       <div class="stack">
-        <div class="kicker" data-anim>Classroom I &mdash; Negotiation</div>
-        <h2 data-anim>The moment I <span class="grad">changed my mind</span></h2>
-        <p class="lead" data-anim>I run on data. I walked in assuming negotiation was an information problem: know more, win more.</p>
-        <div class="todo-block" data-anim>[ Chen: the specific exercise, what you opened with, what the other side did, and the sentence from the professor that reframed it. This is the emotional peak of the whole talk &mdash; I need the real scene, with a number in it if possible. ]</div>
+        <div class="kicker" data-anim>Classroom I &mdash; Negotiation Strategies &middot; Leigh Thompson</div>
+        <h2 data-anim style="font-size:clamp(24px,3.2vw,46px)">The exercise was not the point. <span class="grad">One sentence was.</span></h2>
+        <p class="lead" data-anim>I run on data. I walked in assuming negotiation is an information problem: know more, win more. I spent the drills proving myself right, and then Thompson said something that made the whole frame look small.</p>
+        <blockquote data-anim>
+          <div class="q"><span class="todo">[ Chen: Leigh Thompson&rsquo;s line &mdash; her words if you remember them, otherwise the gist. This is the single most important blank in the deck. ]</span></div>
+          <cite>Leigh Thompson &mdash; Negotiation Strategies</cite>
+        </blockquote>
       </div>
       <div class="stack">
         <p class="small" data-anim style="letter-spacing:.16em;text-transform:uppercase;font-size:11px;color:var(--faint)">The frameworks we were drilled on</p>
@@ -605,14 +623,16 @@ figcaption{
     <div class="split">
       <div class="ph-slot" data-anim style="min-height:clamp(240px,38vh,460px)">[ photo slot &mdash; the press conference, the podium, or the room watching.<br>No video exists of this, so a photo has to carry it. ]</div>
       <div class="stack">
-        <div class="kicker" data-anim>Classroom II &mdash; Crisis Management</div>
-        <h2 data-anim>They put you at a podium and <span class="grad">let the press in.</span></h2>
-        <p class="lead" data-anim>A simulated press conference. Real cameras, hostile questions, a clock, and no time to build a slide.</p>
-        <div class="stack" data-anim>
-          <div class="card"><span class="n">01</span><h3>Detect &amp; assess</h3><p>Early warning, rapid situation analysis, what you actually know versus what you are guessing.</p></div>
-          <div class="card"><span class="n">02</span><h3>Decide under pressure</h3><p>Stakeholders, message, sequence &mdash; in minutes, not weeks.</p></div>
+        <div class="kicker" data-anim>Classroom II &mdash; Strategic Crisis Management &middot; Timothy Feddersen</div>
+        <h2 data-anim style="font-size:clamp(24px,3.2vw,46px)">I wasn&rsquo;t at the podium.<br>I was <span class="grad">the press.</span></h2>
+        <p class="lead" data-anim>
+          Classmates got the podium. The rest of us became reporters, and we were told to go after them. Asking the hostile question teaches you something that being asked it cannot: from the floor, every dodge is completely obvious. Every one. Including the ones I have used in real meetings.
+        </p>
+        <div class="grid2" data-anim>
+          <div class="card"><span class="n">From the podium</span><p>You feel like you are buying time.</p></div>
+          <div class="card"><span class="n">From the floor</span><p>Everyone can see you buying time.</p></div>
         </div>
-        <div class="todo-block" data-anim>[ Chen: were you at the podium? What question did you get, and how badly did it go? The honest version is far better than the polished one. ]</div>
+        <div class="todo-block" data-anim>[ Chen: the question you asked, and how the person on the podium handled it. Name the topic of the crisis case too. ]</div>
       </div>
     </div>
   </div>
@@ -621,23 +641,25 @@ figcaption{
 <!-- ============ 09 AI / ANALYTICS - CHEN'S HOME TURF ============ -->
 <section class="slide" data-title="AI &amp; analytics - Kellogg vs my day job">
   <div class="wrap">
-    <div class="kicker" data-anim>Classroom III &mdash; AI &amp; Analytics</div>
-    <h2 data-anim style="max-width:28ch">This is the one I came for &mdash; and the one that <span class="grad">embarrassed me.</span></h2>
-    <div class="grid2" style="margin-top:clamp(20px,2.6vw,38px)">
+    <div class="kicker" data-anim>Classroom III &mdash; Marketing Analytics: Leading with Big Data &middot; Eric Anderson</div>
+    <h2 data-anim style="max-width:28ch">Not deeper. Not shallower. <span class="grad">A different axis.</span></h2>
+    <p class="lead" data-anim style="margin-top:12px">I have spent fifteen years on this. I expected the course to either impress me or bore me. It did neither &mdash; it was pointed ninety degrees away from where I point.</p>
+    <div class="grid2" style="margin-top:clamp(18px,2.4vw,34px)">
       <div class="card" data-anim>
-        <span class="n">Marketing Analytics: Leading with Big Data &middot; Eric Anderson</span>
-        <h3>Analytics as a decision, not a model</h3>
-        <p>The framing is not &ldquo;which algorithm&rdquo; &mdash; it is &ldquo;what decision changes, and who has to believe it.&rdquo;
-        <span class="todo">[ Chen: the actual case or dataset you worked on, and the one thing Anderson said that stuck ]</span></p>
+        <span class="n">Where Kellogg points</span>
+        <h3>Who has to believe it</h3>
+        <p>Which decision changes, who owns that decision, and what evidence would actually move them. The model is an input to a persuasion problem.
+        <span class="todo">[ Chen: the case or dataset you worked on ]</span></p>
       </div>
       <div class="card" data-anim>
-        <span class="n">How I do it at GLP</span>
-        <h3>Fifteen years of building the machine</h3>
-        <p><span class="todo">[ Chen: the honest comparison. Where was Kellogg ahead of your practice? Where were you ahead of the classroom? This contrast is your differentiator &mdash; neither of last year&rsquo;s speakers could say anything here. ]</span></p>
+        <span class="n">Where I point</span>
+        <h3>How the machine gets built &mdash; and stays alive</h3>
+        <p>Pipelines, governance, headcount, the thing still running in eighteen months. The persuasion is an input to a system problem.
+        <span class="todo">[ Chen: adjust this if I have your side wrong ]</span></p>
       </div>
     </div>
-    <p class="small" data-anim style="margin-top:clamp(16px,2vw,28px);max-width:74ch">
-      For anyone in this audience who works in tech, data or AI: this is the week the EMBA stops being general management and starts being <em class="it">your</em> problem, discussed by 130 people who all need what you build.
+    <p class="small" data-anim style="margin-top:clamp(14px,1.8vw,26px);max-width:78ch">
+      Both are right, and neither is complete on its own. If you work in tech, data or AI, this is the week the EMBA stops being general management and becomes <em class="it">your</em> problem &mdash; argued at you by 130 people who all need what you build.
     </p>
   </div>
 </section>
@@ -786,21 +808,24 @@ figcaption{
   <div class="wrap">
     <div class="kicker" data-anim>The return flight</div>
     <h2 data-anim style="max-width:22ch">Three things went into the <span class="grad">carry-on</span></h2>
-    <div class="grid3" style="margin-top:clamp(22px,2.8vw,44px)">
-      <div class="card" data-anim>
-        <span class="n">01 &mdash; A way of thinking</span>
-        <h3><span class="todo">[ the reframe ]</span></h3>
-        <p><span class="todo">[ Chen: one belief you held on 1 August that you no longer hold ]</span></p>
-      </div>
-      <div class="card" data-anim>
-        <span class="n">02 &mdash; A method I now use</span>
-        <h3><span class="todo">[ the tool ]</span></h3>
-        <p><span class="todo">[ Chen: something concrete you have already applied at GLP &mdash; a meeting you ran differently, a negotiation you reopened ]</span></p>
-      </div>
-      <div class="card" data-anim>
-        <span class="n">03 &mdash; A set of people</span>
-        <h3><span class="todo">[ the network, made specific ]</span></h3>
-        <p><span class="todo">[ Chen: who have you actually messaged since coming home, and about what? ]</span></p>
+    <p class="lead" data-anim style="margin-top:12px">Two of them are useful. The third one is the reason I would go again.</p>
+    <div class="split top" style="margin-top:clamp(18px,2.4vw,36px)">
+      <blockquote data-anim>
+        <div class="q">The heaviest thing I brought home was <span class="grad">a different read on myself.</span></div>
+        <cite>The one that mattered</cite>
+        <p class="small" style="margin-top:clamp(12px,1.4vw,20px)"><span class="todo">[ Chen: this is the closing argument of the whole talk. In a room of 130 senior people from four continents, what did you find out about where you actually stand &mdash; and was it flattering or not? The unflattering version is the one people remember. ]</span></p>
+      </blockquote>
+      <div class="stack">
+        <div class="card" data-anim>
+          <span class="n">Also &mdash; a method I now use</span>
+          <h3><span class="todo">[ the tool ]</span></h3>
+          <p><span class="todo">[ something concrete already applied at GLP: a meeting run differently, a negotiation reopened ]</span></p>
+        </div>
+        <div class="card" data-anim>
+          <span class="n">Also &mdash; a set of people</span>
+          <h3><span class="todo">[ the network, made specific ]</span></h3>
+          <p><span class="todo">[ who you have actually messaged since coming home, and about what ]</span></p>
+        </div>
       </div>
     </div>
   </div>
