@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>One Week. 130 People. Six Campuses. — GNW Evanston 2026</title>
+<meta name="description" content="Global Network Week 2026, Evanston. A first-person account from the Guanghua-Kellogg EMBA, GK12.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,900;1,500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   GK design system - Guanghua crimson -> Kellogg purple
+   palette sampled from the official GK cover artwork
+   ============================================================ */
+:root{
+  --crimson:#B12D29;
+  --crimson-deep:#8E1F2B;
+  --mid:#6D2660;
+  --purple:#4E2A84;
+  --purple-deep:#33195B;
+
+  --ink:#0A0710;
+  --text:#F2ECEF;
+  --muted:rgba(242,236,239,.60);
+  --faint:rgba(242,236,239,.34);
+  --line:rgba(242,236,239,.14);
+
+  --gk:linear-gradient(100deg,var(--crimson) 0%,var(--mid) 52%,var(--purple) 100%);
+  /* lifted variant - the brand colours are too dark to read as type on near-black */
+  --gk-text:linear-gradient(102deg,#F0655B 0%,#C2599F 46%,#9E82EE 100%);
+
+  --display:"Playfair Display",Georgia,serif;
+  --body:"Inter","Helvetica Neue",Helvetica,Arial,sans-serif;
+
+  --pad:clamp(28px,4.4vw,86px);
+  --ease:cubic-bezier(.22,.68,.24,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{
+  background:var(--ink);color:var(--text);font-family:var(--body);
+  overflow:hidden;-webkit-font-smoothing:antialiased;
+}
+img,video{display:block;max-width:100%}
+button{font-family:inherit}
+
+/* ---------------- deck shell ---------------- */
+#deck{position:fixed;inset:0}
+.slide{
+  position:absolute;inset:0;
+  display:flex;flex-direction:column;justify-content:center;
+  padding:var(--pad);
+  /* keep content clear of the nav cluster and the slide counter */
+  padding-bottom:clamp(78px,7.4vw,124px);
+  opacity:0;visibility:hidden;transform:translateY(22px) scale(.994);
+  transition:opacity .55s var(--ease),transform .55s var(--ease),visibility .55s;
+  overflow:hidden;
+}
+.slide.is-active{opacity:1;visibility:visible;transform:none;z-index:2}
+
+/* ---------------- chrome ---------------- */
+#bar{position:fixed;left:0;top:0;height:3px;width:100%;z-index:60;background:rgba(255,255,255,.07)}
+#bar span{display:block;height:100%;width:0;background:var(--gk);transition:width .5s var(--ease)}
+#brand{position:fixed;top:20px;right:var(--pad);z-index:55;opacity:.9;pointer-events:none;transition:opacity .4s}
+#brand img{height:clamp(20px,1.9vw,28px);width:auto}
+#brand.hidden{opacity:0}
+#meta{
+  position:fixed;bottom:20px;right:var(--pad);z-index:55;
+  font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--faint);
+}
+#nav{position:fixed;bottom:15px;left:var(--pad);z-index:56;display:flex;gap:8px}
+.nbtn{
+  width:34px;height:34px;border-radius:50%;border:1px solid var(--line);
+  background:rgba(255,255,255,.03);color:var(--muted);cursor:pointer;font-size:13px;
+  display:grid;place-items:center;transition:.25s var(--ease);
+}
+.nbtn:hover{color:var(--text);border-color:rgba(242,236,239,.45);background:rgba(255,255,255,.08)}
+#hint{
+  position:fixed;bottom:23px;left:50%;transform:translateX(-50%);z-index:55;
+  font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);transition:opacity .6s;
+}
+#hint.gone{opacity:0;pointer-events:none}
+kbd{font-size:10px;border:1px solid var(--line);border-radius:4px;padding:2px 5px;color:var(--muted)}
+
+/* ---------------- typography ---------------- */
+.kicker{
+  font-size:clamp(10px,.86vw,12px);letter-spacing:.28em;text-transform:uppercase;
+  color:var(--faint);margin-bottom:clamp(14px,1.6vw,22px);
+  display:flex;align-items:center;gap:12px;
+}
+.kicker::before{content:"";width:clamp(22px,3vw,44px);height:1px;background:var(--gk)}
+h1{font-family:var(--display);font-weight:700;line-height:.99;letter-spacing:-.015em;font-size:clamp(36px,6.4vw,100px)}
+h2{font-family:var(--display);font-weight:700;line-height:1.05;letter-spacing:-.012em;font-size:clamp(27px,4vw,60px)}
+h3{font-family:var(--display);font-weight:700;line-height:1.15;font-size:clamp(18px,1.85vw,29px)}
+.lead{font-size:clamp(15px,1.32vw,21px);line-height:1.62;color:var(--muted);max-width:62ch;font-weight:300}
+.small{font-size:clamp(12px,1.02vw,15px);line-height:1.64;color:var(--muted);font-weight:300}
+.grad{background:var(--gk-text);-webkit-background-clip:text;background-clip:text;color:transparent}
+em.it{font-family:var(--display);font-style:italic;font-weight:500;color:var(--text)}
+
+/* placeholder marker - content still owed by the speaker */
+.todo{color:#F0B44A;border-bottom:1px dashed rgba(240,180,74,.5);font-style:italic}
+.todo-block{
+  border:1px dashed rgba(240,180,74,.34);border-radius:10px;
+  padding:clamp(12px,1.3vw,20px);background:rgba(240,180,74,.05);
+  color:#F0B44A;font-size:clamp(12px,1.02vw,14.5px);line-height:1.6;font-style:italic;
+}
+
+/* ---------------- reveal ---------------- */
+[data-anim]{opacity:0;transform:translateY(18px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+[data-anim].in{opacity:1;transform:none}
+
+/* ---------------- layout helpers ---------------- */
+.wrap{width:100%;max-width:1480px;margin:0 auto}
+.split{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(26px,3.6vw,60px);align-items:center}
+.split.top{align-items:start}
+.stack{display:flex;flex-direction:column;gap:clamp(13px,1.4vw,20px)}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(13px,1.5vw,24px)}
+.grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(13px,1.5vw,24px)}
+
+.card{
+  border:1px solid var(--line);border-radius:14px;padding:clamp(15px,1.6vw,26px);
+  background:linear-gradient(160deg,rgba(255,255,255,.045),rgba(255,255,255,.012));
+  position:relative;overflow:hidden;
+}
+.card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:2px;background:var(--gk);opacity:.85}
+.card .n{font-family:var(--display);font-size:clamp(12px,1.05vw,15px);color:var(--faint);letter-spacing:.06em;margin-bottom:8px;display:block}
+.card p{font-size:clamp(12px,1vw,14.5px);line-height:1.66;color:var(--muted);font-weight:300}
+.card h3{margin-bottom:8px}
+
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{
+  font-size:clamp(10px,.84vw,12.5px);letter-spacing:.08em;text-transform:uppercase;
+  border:1px solid var(--line);border-radius:999px;padding:7px 14px;color:var(--muted);background:rgba(255,255,255,.02);
+}
+.chip.hot{border-color:rgba(177,45,41,.55);color:#F2C6C2;background:rgba(177,45,41,.12)}
+
+figure{position:relative;border-radius:14px;overflow:hidden;border:1px solid var(--line);background:#100A18}
+figure img,figure video{width:100%;height:100%;object-fit:cover}
+figcaption{
+  position:absolute;left:0;right:0;bottom:0;padding:13px 16px;
+  background:linear-gradient(to top,rgba(10,7,16,.92),transparent);
+  font-size:clamp(10px,.86vw,12px);letter-spacing:.1em;text-transform:uppercase;color:rgba(242,236,239,.82);
+}
+
+/* ---------------- 01 cover ---------------- */
+.cover{padding:0;justify-content:flex-end}
+.cover .bg{position:absolute;inset:0;z-index:0;overflow:hidden}
+.cover .bg img{width:100%;height:100%;object-fit:cover;transform:scale(1.05);transition:transform 16s linear}
+.cover.is-active .bg img{transform:scale(1.15) translate(-1.4%,-1.2%)}
+.cover .veil{
+  position:absolute;inset:0;z-index:1;
+  background:
+    /* editorial scrim: dark on the left where the type sits, lake left visible on the right */
+    linear-gradient(to right,rgba(8,5,13,.94) 0%,rgba(8,5,13,.80) 30%,rgba(8,5,13,.34) 58%,rgba(8,5,13,.10) 78%,rgba(8,5,13,.30) 100%),
+    linear-gradient(to top,rgba(8,5,13,.90) 0%,rgba(8,5,13,.34) 46%,rgba(8,5,13,0) 72%,rgba(8,5,13,.44) 100%),
+    linear-gradient(100deg,rgba(177,45,41,.20),rgba(78,42,132,.30));
+}
+.cover .inner{position:relative;z-index:2;padding:var(--pad);padding-bottom:clamp(62px,7vw,104px)}
+.cover h1{max-width:20ch}
+.cover .rule{width:72px;height:2px;background:var(--gk);margin:clamp(18px,2.2vw,30px) 0}
+.cover .by{font-size:clamp(12px,1.04vw,15px);color:var(--muted);line-height:1.75}
+.cover .by b{color:var(--text);font-weight:600}
+.cover .logo{position:absolute;top:clamp(24px,2.8vw,40px);left:var(--pad);z-index:3}
+.cover .logo img{height:clamp(28px,2.9vw,42px)}
+
+/* ---------------- 03 network map ---------------- */
+.mapbox{position:relative;width:100%}
+.mapbox svg{width:100%;height:auto;overflow:hidden;max-height:56vh}
+.graticule{stroke:rgba(242,236,239,.075);stroke-width:1;fill:none}
+.arc{fill:none;stroke-width:1.6;stroke-linecap:round;opacity:.9}
+.arc-draw{stroke-dasharray:var(--len);stroke-dashoffset:var(--len);transition:stroke-dashoffset 1.5s var(--ease)}
+.arc-draw.in{stroke-dashoffset:0}
+.node circle.dot{fill:#F2ECEF}
+.node circle.halo{fill:none;stroke:rgba(242,236,239,.30);stroke-width:1}
+.node.hub circle.dot{fill:#fff}
+.node text.city{
+  font-family:var(--body);font-size:12.5px;font-weight:600;fill:#F2ECEF;letter-spacing:.02em;
+}
+.node text.school{
+  font-family:var(--body);font-size:10.5px;font-weight:300;fill:rgba(242,236,239,.52);letter-spacing:.04em;
+}
+.node{opacity:0;transform:translateY(6px);transition:opacity .6s var(--ease),transform .6s var(--ease)}
+.node.in{opacity:1;transform:none}
+.pulse{transform-box:fill-box;transform-origin:center;animation:pulse 2.6s ease-out infinite}
+@keyframes pulse{
+  0%{r:9;opacity:.85}
+  100%{r:34;opacity:0}
+}
+.travel{opacity:0}
+.travel.in{opacity:1}
+
+/* ---------------- 04 numbers ---------------- */
+.nums{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(18px,2.4vw,48px) clamp(14px,2vw,40px)}
+.num .v{
+  font-family:var(--display);font-weight:700;line-height:1;
+  font-size:clamp(52px,8vw,132px);
+  background:var(--gk-text);-webkit-background-clip:text;background-clip:text;color:transparent;
+  /* inline-flex so the gradient spans the digits, not the whole column */
+  display:inline-flex;align-items:baseline;width:-moz-fit-content;width:fit-content;
+}
+.num .v .suf{font-size:.42em;margin-left:.06em}
+.num .k{
+  margin-top:10px;font-size:clamp(11px,.94vw,13.5px);letter-spacing:.18em;
+  text-transform:uppercase;color:var(--muted);
+}
+.num .k s{text-decoration:none;color:#F0B44A}
+
+/* ---------------- 05 timeline ---------------- */
+.tl{position:relative;padding-left:clamp(22px,2.4vw,38px)}
+.tl::before{content:"";position:absolute;left:6px;top:6px;bottom:10px;width:1px;background:linear-gradient(to bottom,#F0655B,#9E82EE)}
+.tlrow{position:relative;padding:0 0 clamp(16px,1.9vw,28px) 0}
+.tlrow:last-child{padding-bottom:4px}
+.tlrow h3{font-size:clamp(16px,1.62vw,25px)}
+.tlrow::before{
+  content:"";position:absolute;left:calc(-1 * clamp(24px,2.6vw,42px) + 2px);top:7px;
+  width:9px;height:9px;border-radius:50%;background:var(--ink);border:2px solid var(--crimson);
+}
+.tlrow.p::before{border-color:var(--purple)}
+.tlrow .d{font-size:clamp(10px,.86vw,12px);letter-spacing:.2em;text-transform:uppercase;color:var(--faint);margin-bottom:6px}
+.tlrow h3{margin-bottom:5px}
+
+/* ---------------- 10 flip cards ---------------- */
+.flipgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(12px,1.4vw,22px)}
+.flip{perspective:1200px;cursor:pointer;height:clamp(140px,15.5vw,220px)}
+.flip .in3d{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform .72s var(--ease)}
+.flip.flipped .in3d{transform:rotateY(180deg)}
+.face{
+  position:absolute;inset:0;backface-visibility:hidden;border-radius:14px;
+  border:1px solid var(--line);padding:clamp(14px,1.5vw,22px);
+  display:flex;flex-direction:column;justify-content:space-between;
+}
+.face.front{background:linear-gradient(160deg,rgba(255,255,255,.05),rgba(255,255,255,.012))}
+.face.back{background:var(--gk);transform:rotateY(180deg);border-color:transparent}
+.face .lbl{font-size:clamp(10px,.84vw,12px);letter-spacing:.2em;text-transform:uppercase;color:var(--faint)}
+.face.back .lbl{color:rgba(255,255,255,.7)}
+.face .txt{font-family:var(--display);font-size:clamp(15px,1.5vw,23px);line-height:1.2}
+.face .cue{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--faint)}
+.face.back .cue{color:rgba(255,255,255,.62)}
+
+/* ---------------- 11 team wall ---------------- */
+.wall{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:clamp(11px,1.2vw,18px)}
+.person{
+  border:1px solid var(--line);border-radius:14px;overflow:hidden;
+  background:linear-gradient(160deg,rgba(255,255,255,.05),rgba(255,255,255,.012));
+}
+.person .ph{
+  aspect-ratio:1;background:linear-gradient(150deg,rgba(177,45,41,.30),rgba(78,42,132,.36));
+  display:grid;place-items:center;font-family:var(--display);font-size:clamp(24px,2.6vw,40px);
+  color:rgba(255,255,255,.66);
+}
+.person .info{padding:12px 13px}
+.person .nm{font-size:clamp(12px,1.02vw,14.5px);font-weight:600;margin-bottom:3px}
+.person .rl{font-size:clamp(10px,.86vw,12px);color:var(--faint);line-height:1.5}
+
+/* ---------------- 13 big statement ---------------- */
+.statement{text-align:center;align-items:center;justify-content:center}
+.statement .huge{
+  font-family:var(--display);font-weight:900;line-height:.92;letter-spacing:-.02em;
+  font-size:clamp(44px,9.4vw,168px);
+}
+.statement .huge span{display:block}
+.statement .huge .b{background:var(--gk-text);-webkit-background-clip:text;background-clip:text;color:transparent}
+
+/* ---------------- 14 mosaic ---------------- */
+.mosaic{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:clamp(84px,10vw,150px);gap:clamp(9px,1vw,15px)}
+.mosaic figure{height:100%}
+.m-w2{grid-column:span 2}
+.m-h2{grid-row:span 2}
+.ph-slot{
+  height:100%;border:1px dashed rgba(240,180,74,.34);border-radius:14px;
+  background:rgba(240,180,74,.05);display:grid;place-items:center;text-align:center;
+  color:#F0B44A;font-size:clamp(10px,.86vw,12px);font-style:italic;padding:10px;line-height:1.5;
+}
+
+/* ---------------- 15 full-bleed media ---------------- */
+.bleed{padding:0;justify-content:flex-end}
+.bleed .bg{position:absolute;inset:0;z-index:0;overflow:hidden}
+.bleed .bg img,.bleed .bg video{width:100%;height:100%;object-fit:cover}
+.bleed .veil{position:absolute;inset:0;z-index:1;background:linear-gradient(to top,rgba(10,7,16,.92),rgba(10,7,16,.22) 55%,rgba(10,7,16,.44))}
+.bleed .inner{position:relative;z-index:2;padding:var(--pad);padding-bottom:clamp(58px,6.6vw,96px)}
+
+/* ---------------- 17 truths ---------------- */
+.truths{display:flex;flex-direction:column;gap:clamp(9px,1vw,15px)}
+.truth{
+  display:grid;grid-template-columns:auto 1fr;gap:clamp(14px,1.6vw,26px);align-items:baseline;
+  border-bottom:1px solid var(--line);padding-bottom:clamp(9px,1vw,15px);
+}
+.truth .i{font-family:var(--display);font-size:clamp(16px,1.6vw,25px);color:transparent;background:var(--gk-text);-webkit-background-clip:text;background-clip:text;font-weight:700;min-width:2.1em}
+.truth .t{font-family:var(--display);font-size:clamp(15px,1.62vw,26px);line-height:1.26;margin-bottom:5px}
+.truth .s{font-size:clamp(11px,.96vw,14px);color:var(--muted);line-height:1.6;font-weight:300}
+
+/* ---------------- 18 closing ---------------- */
+.close-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:clamp(28px,4vw,70px);align-items:end}
+.qr{width:clamp(120px,13vw,180px);aspect-ratio:1;border:1px dashed rgba(240,180,74,.34);border-radius:12px;background:rgba(240,180,74,.05);display:grid;place-items:center;color:#F0B44A;font-size:11px;font-style:italic;text-align:center;padding:12px;line-height:1.5}
+
+/* ---------------- overview ---------------- */
+#ov{
+  position:fixed;inset:0;z-index:80;background:rgba(6,4,10,.97);
+  padding:clamp(24px,3.4vw,56px);overflow-y:auto;display:none;
+}
+#ov.on{display:block}
+#ov h4{font-family:var(--body);font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--faint);margin-bottom:22px}
+#ovgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px}
+.ovcard{
+  border:1px solid var(--line);border-radius:10px;padding:14px;cursor:pointer;
+  background:rgba(255,255,255,.02);transition:.22s var(--ease);text-align:left;color:inherit;
+}
+.ovcard:hover{border-color:rgba(242,236,239,.42);background:rgba(255,255,255,.07)}
+.ovcard.cur{border-color:transparent;background:var(--gk)}
+.ovcard .i{font-family:var(--display);font-size:12px;color:var(--faint);display:block;margin-bottom:6px}
+.ovcard.cur .i{color:rgba(255,255,255,.7)}
+.ovcard .t{font-size:12.5px;line-height:1.4;font-weight:500}
+
+@media (max-width:900px){
+  .split,.close-grid{grid-template-columns:1fr}
+  .grid3,.nums,.flipgrid{grid-template-columns:1fr 1fr}
+  .mosaic{grid-template-columns:1fr 1fr}
+  #brand{display:none}
+}
+</style>
+</head>
+<body>
+
+<div id="bar"><span></span></div>
+<div id="brand"><img src="assets/img/gk-logo-white.png" alt="Kellogg Guanghua Executive MBA Global Network"></div>
+
+<div id="deck">
+
+<!-- ============ 01 COVER ============ -->
+<section class="slide cover" data-title="Cover">
+  <div class="bg"><img src="assets/img/hub-terrace-lakeview.jpg" alt="View from the Kellogg Global Hub terrace across the lagoon toward Lake Michigan and the Chicago skyline"></div>
+  <div class="veil"></div>
+  <div class="logo"><img src="assets/img/gk-logo-white.png" alt="Kellogg Guanghua EMBA Global Network"></div>
+  <div class="inner">
+    <div class="kicker" data-anim>Global Network Week &nbsp;&middot;&nbsp; Evanston, August 2026</div>
+    <h1 data-anim>One week.<br>130 people.<br><span class="grad">Six campuses.</span></h1>
+    <div class="rule" data-anim></div>
+    <p class="by" data-anim>
+      <b>Chen Gao</b> &nbsp;&middot;&nbsp; Guanghua&ndash;Kellogg EMBA, GK12<br>
+      VP, Big Data &amp; AI, GLP &nbsp;&middot;&nbsp; former CDO, Decathlon China
+    </p>
+  </div>
+</section>
+
+<!-- ============ 02 WHY I WENT ============ -->
+<section class="slide" data-title="Three questions I packed">
+  <div class="wrap">
+    <div class="kicker" data-anim>Before I flew</div>
+    <h2 data-anim style="max-width:20ch">I didn&rsquo;t fly 11,000 km for the credits.<br>I flew with <span class="grad">three questions.</span></h2>
+    <div class="grid3" style="margin-top:clamp(24px,3vw,46px)">
+      <div class="card" data-anim>
+        <span class="n">Q1</span>
+        <h3>The one about the work</h3>
+        <p><span class="todo">[ Chen: the business question you actually carried &mdash; e.g. &ldquo;how do I get an AI roadmap past a room of people who don&rsquo;t want it?&rdquo; ]</span></p>
+      </div>
+      <div class="card" data-anim>
+        <span class="n">Q2</span>
+        <h3>The one about the room</h3>
+        <p><span class="todo">[ Chen: what you wanted to find out about a genuinely global cohort &mdash; the thing a brochure can&rsquo;t tell you ]</span></p>
+      </div>
+      <div class="card" data-anim>
+        <span class="n">Q3</span>
+        <h3>The one about Monday morning</h3>
+        <p><span class="todo">[ Chen: what you hoped to be able to do differently the week you got back ]</span></p>
+      </div>
+    </div>
+    <p class="small" data-anim style="margin-top:clamp(20px,2.4vw,34px)">By Friday I had answers to two of them. The third one got replaced by a better question.</p>
+  </div>
+</section>
+
+<!-- ============ 03 THE NETWORK MAP ============ -->
+<section class="slide" data-title="Six campuses, one classroom">
+  <div class="wrap">
+    <div class="kicker" data-anim>The mechanism</div>
+    <h2 data-anim style="max-width:26ch">Six campuses. Four continents. <span class="grad">One classroom, once a year.</span></h2>
+    <div class="mapbox" style="margin-top:clamp(14px,2vw,30px)">
+      <svg viewBox="0 0 1000 380" role="img" aria-label="Map of the six Kellogg EMBA Global Network campuses converging on Evanston">
+        <defs>
+          <linearGradient id="gkArc" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#F0655B"/><stop offset="100%" stop-color="#9E82EE"/>
+          </linearGradient>
+          <radialGradient id="hubGlow">
+            <stop offset="0%" stop-color="#C7382F" stop-opacity=".50"/>
+            <stop offset="100%" stop-color="#C7382F" stop-opacity="0"/>
+          </radialGradient>
+        </defs>
+
+        <!-- graticule -->
+        <g class="graticule">
+          <line x1="0" y1="70" x2="1000" y2="70"/>
+          <line x1="0" y1="150" x2="1000" y2="150"/>
+          <line x1="0" y1="230" x2="1000" y2="230"/>
+          <line x1="0" y1="310" x2="1000" y2="310"/>
+          <line x1="120" y1="20" x2="120" y2="360"/>
+          <line x1="320" y1="20" x2="320" y2="360"/>
+          <line x1="520" y1="20" x2="520" y2="360"/>
+          <line x1="700" y1="20" x2="700" y2="360"/>
+          <line x1="880" y1="20" x2="880" y2="360"/>
+        </g>
+
+        <!-- hub glow -->
+        <circle cx="200" cy="240" r="128" fill="url(#hubGlow)"/>
+
+        <!-- arcs into Evanston -->
+        <g id="arcs" stroke="url(#gkArc)">
+          <path class="arc arc-draw" d="M290,120 Q224,158 200,240"/>
+          <path class="arc arc-draw" d="M505,118 Q322,112 200,240"/>
+          <path class="arc arc-draw" d="M600,272 Q392,336 200,240"/>
+          <path class="arc arc-draw" d="M780,102 Q488,26 200,240"/>
+          <path class="arc arc-draw" d="M800,296 Q500,368 200,240"/>
+        </g>
+
+        <!-- travelling dots -->
+        <g id="travellers" fill="#F2ECEF"></g>
+
+        <!-- nodes -->
+        <g id="nodes">
+          <g class="node hub" data-i="0">
+            <circle class="pulse" cx="200" cy="240" r="9" fill="none" stroke="#F0655B" stroke-width="1.4"/>
+            <circle class="dot" cx="200" cy="240" r="7"/>
+            <circle class="halo" cx="200" cy="240" r="15"/>
+            <text class="city" x="200" y="284" text-anchor="middle">EVANSTON &middot; CHICAGO</text>
+            <text class="school" x="200" y="302" text-anchor="middle">Kellogg School of Management &mdash; the host</text>
+          </g>
+          <g class="node" data-i="1">
+            <circle class="dot" cx="290" cy="120" r="4.5"/>
+            <text class="city" x="304" y="117">Toronto</text>
+            <text class="school" x="304" y="133">Schulich, York University</text>
+          </g>
+          <g class="node" data-i="2">
+            <circle class="dot" cx="505" cy="118" r="4.5"/>
+            <text class="city" x="519" y="115">D&uuml;sseldorf / Vallendar</text>
+            <text class="school" x="519" y="131">WHU &ndash; Otto Beisheim</text>
+          </g>
+          <g class="node" data-i="3">
+            <circle class="dot" cx="600" cy="272" r="4.5"/>
+            <text class="city" x="614" y="269">Tel Aviv</text>
+            <text class="school" x="614" y="285">Recanati, Tel Aviv University</text>
+          </g>
+          <g class="node" data-i="4">
+            <circle class="halo" cx="780" cy="102" r="11" stroke="rgba(240,101,91,.7)"/>
+            <circle class="dot" cx="780" cy="102" r="5"/>
+            <text class="city" x="798" y="99">Beijing &mdash; that&rsquo;s us</text>
+            <text class="school" x="798" y="115">Guanghua, Peking University</text>
+          </g>
+          <g class="node" data-i="5">
+            <circle class="dot" cx="800" cy="296" r="4.5"/>
+            <text class="city" x="814" y="293">Hong Kong</text>
+            <text class="school" x="814" y="309">HKUST Business School</text>
+          </g>
+        </g>
+      </svg>
+    </div>
+    <p class="small" data-anim style="margin-top:clamp(10px,1.4vw,20px);max-width:76ch">
+      Every cohort studies in its own city for a year. Then, once a year, all of them fly to the same campus and sit in the same room for a week. That week is Global Network Week. <span class="todo">[ Chen: confirm the campus list &mdash; I have six; Sarah&rsquo;s 2025 deck said &ldquo;6 campuses, 8 classes&rdquo; ]</span>
+    </p>
+  </div>
+</section>
+
+<!-- ============ 04 NUMBERS ============ -->
+<section class="slide" data-title="The week in numbers">
+  <div class="wrap">
+    <div class="kicker" data-anim>The week in numbers</div>
+    <div class="nums" style="margin-top:clamp(18px,2.4vw,40px)">
+      <div class="num" data-anim><div class="v"><span data-count="130">0</span><span class="suf">+</span></div><div class="k">classmates in one room</div></div>
+      <div class="num" data-anim><div class="v"><span data-count="6">0</span></div><div class="k">partner campuses</div></div>
+      <div class="num" data-anim><div class="v"><span data-count="8">0</span></div><div class="k">cohorts <s>&mdash; confirm</s></div></div>
+      <div class="num" data-anim><div class="v"><span data-count="5">0</span></div><div class="k">days of class <s>&mdash; confirm</s></div></div>
+      <div class="num" data-anim><div class="v"><span data-count="4">0</span></div><div class="k">continents represented <s>&mdash; confirm</s></div></div>
+      <div class="num" data-anim><div class="v"><span data-count="1">0</span></div><div class="k">network, for life</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 05 TIMELINE ============ -->
+<section class="slide" data-title="Anatomy of the week">
+  <div class="wrap">
+    <div class="kicker" data-anim>Anatomy of the week</div>
+    <h2 data-anim style="max-width:26ch;margin-bottom:clamp(16px,2vw,28px)">Hour by hour</h2>
+    <div class="grid2">
+      <div class="tl" data-anim>
+        <div class="tlrow">
+          <div class="d">Before you fly</div>
+          <h3>Pre-reads, cases, a graded quiz</h3>
+          <p class="small">You do not arrive to be introduced to the topic. You arrive expected to already know it. <span class="todo">[ hours of pre-work? how brutal was the quiz? ]</span></p>
+        </div>
+        <div class="tlrow">
+          <div class="d">Day 0 &mdash; Sunday</div>
+          <h3>Arrival, badges, purple T-shirt</h3>
+          <p class="small"><span class="todo">[ first impression walking into the Global Hub ]</span></p>
+        </div>
+        <div class="tlrow">
+          <div class="d">Days 1&ndash;2</div>
+          <h3><span class="todo">[ Course 1 &mdash; name + professor ]</span></h3>
+          <p class="small"><span class="todo">[ one line: what it was, what it did to you ]</span></p>
+        </div>
+      </div>
+      <div class="tl" data-anim>
+        <div class="tlrow p">
+          <div class="d">Days 3&ndash;4</div>
+          <h3><span class="todo">[ Course 2 &mdash; name + professor ]</span></h3>
+          <p class="small"><span class="todo">[ one line ]</span></p>
+        </div>
+        <div class="tlrow p">
+          <div class="d">Every evening</div>
+          <h3>Late Lounge, cocktails, the boat</h3>
+          <p class="small">The formal day ends at six. The part everyone remembers starts at seven.</p>
+        </div>
+        <div class="tlrow p">
+          <div class="d">Day 5</div>
+          <h3>Closing &mdash; and the photo on the steps</h3>
+          <p class="small"><span class="todo">[ was there a formal closing / certificate moment? ]</span></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 06 NEGOTIATION ============ -->
+<section class="slide" data-title="Negotiation - the moment I changed my mind">
+  <div class="wrap">
+    <div class="split top">
+      <div class="stack">
+        <div class="kicker" data-anim>Classroom I &mdash; Negotiation</div>
+        <h2 data-anim>The moment I <span class="grad">changed my mind</span></h2>
+        <p class="lead" data-anim>I run on data. I walked in assuming negotiation was an information problem: know more, win more.</p>
+        <div class="todo-block" data-anim>[ Chen: the specific exercise, what you opened with, what the other side did, and the sentence from the professor that reframed it. This is the emotional peak of the whole talk &mdash; I need the real scene, with a number in it if possible. ]</div>
+      </div>
+      <div class="stack">
+        <p class="small" data-anim style="letter-spacing:.16em;text-transform:uppercase;font-size:11px;color:var(--faint)">The frameworks we were drilled on</p>
+        <div class="chips" data-anim>
+          <span class="chip hot">BATNA</span>
+          <span class="chip hot">Source of power</span>
+          <span class="chip">Issue ranking</span>
+          <span class="chip">MESOs</span>
+          <span class="chip">Contingency contracts</span>
+          <span class="chip">Integrative solutions</span>
+          <span class="chip">Opening strategy</span>
+          <span class="chip">Team negotiation</span>
+          <span class="chip">Dealing with anger</span>
+          <span class="chip">Interests / rights / power</span>
+          <span class="chip">Know when to walk away</span>
+        </div>
+        <div class="card" data-anim style="margin-top:8px">
+          <span class="n">The transferable bit</span>
+          <p>Every one of these survives the flight home. <span class="todo">[ Chen: which one did you use first, back at GLP? ]</span></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 07 NEGOTIATION IN ACTION ============ -->
+<section class="slide" data-title="Negotiation in action (clip)">
+  <div class="wrap">
+    <div class="split">
+      <div class="stack">
+        <div class="kicker" data-anim>Learning by doing</div>
+        <h2 data-anim>You don&rsquo;t discuss it.<br>You <span class="grad">do it</span>, then get taken apart.</h2>
+        <p class="lead" data-anim><span class="todo">[ Chen: what this clip shows, and the one number that made the room go quiet &mdash; e.g. the spread between the best and worst deal in the class ]</span></p>
+      </div>
+      <figure data-anim data-clip>
+        <video src="assets/video/clip-1630786583.mp4" muted loop playsinline preload="metadata"></video>
+        <figcaption><span class="todo">Clip 1630786583 &mdash; Chen: what is this?</span></figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 08 CRISIS MANAGEMENT ============ -->
+<section class="slide" data-title="Crisis management - the press conference">
+  <div class="wrap">
+    <div class="split">
+      <figure data-anim data-clip>
+        <video src="assets/video/clip-2074623286.mp4" muted loop playsinline preload="metadata"></video>
+        <figcaption><span class="todo">Clip 2074623286 &mdash; Chen: is this the press conference?</span></figcaption>
+      </figure>
+      <div class="stack">
+        <div class="kicker" data-anim>Classroom II &mdash; Crisis Management</div>
+        <h2 data-anim>They put you at a podium and <span class="grad">let the press in.</span></h2>
+        <p class="lead" data-anim>A simulated press conference. Real cameras, hostile questions, a clock, and no time to build a slide.</p>
+        <div class="stack" data-anim>
+          <div class="card"><span class="n">01</span><h3>Detect &amp; assess</h3><p>Early warning, rapid situation analysis, what you actually know versus what you are guessing.</p></div>
+          <div class="card"><span class="n">02</span><h3>Decide under pressure</h3><p>Stakeholders, message, sequence &mdash; in minutes, not weeks.</p></div>
+        </div>
+        <div class="todo-block" data-anim>[ Chen: were you at the podium? What question did you get, and how badly did it go? The honest version is far better than the polished one. ]</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 09 AI / ANALYTICS - CHEN'S HOME TURF ============ -->
+<section class="slide" data-title="AI &amp; analytics - Kellogg vs my day job">
+  <div class="wrap">
+    <div class="kicker" data-anim>Classroom III &mdash; AI &amp; Analytics</div>
+    <h2 data-anim style="max-width:28ch">This is the one I came for &mdash; and the one that <span class="grad">embarrassed me.</span></h2>
+    <div class="grid2" style="margin-top:clamp(20px,2.6vw,38px)">
+      <div class="card" data-anim>
+        <span class="n">How Kellogg teaches it</span>
+        <h3>Analytics as a decision, not a model</h3>
+        <p>Kellogg runs a dedicated data-analytics and AI programme inside the school. The framing is not &ldquo;which algorithm&rdquo; &mdash; it is &ldquo;what decision changes, and who has to believe it.&rdquo;
+        <span class="todo">[ Chen: professor name + the actual case or tool you worked on ]</span></p>
+      </div>
+      <div class="card" data-anim>
+        <span class="n">How I do it at GLP</span>
+        <h3>Fifteen years of building the machine</h3>
+        <p><span class="todo">[ Chen: the honest comparison. Where was Kellogg ahead of your practice? Where were you ahead of the classroom? This contrast is your differentiator &mdash; neither of last year&rsquo;s speakers could say anything here. ]</span></p>
+      </div>
+    </div>
+    <p class="small" data-anim style="margin-top:clamp(16px,2vw,28px);max-width:74ch">
+      For anyone in this audience who works in tech, data or AI: this is the week the EMBA stops being general management and starts being <em class="it">your</em> problem, discussed by 130 people who all need what you build.
+    </p>
+  </div>
+</section>
+
+<!-- ============ 10 CLASSROOM CONTRAST (FLIP) ============ -->
+<section class="slide" data-title="What a Kellogg classroom feels like">
+  <div class="wrap">
+    <div class="kicker" data-anim>The thing nobody warns you about</div>
+    <h2 data-anim style="max-width:24ch">Six ways the room is <span class="grad">not</span> what you are used to</h2>
+    <p class="small" data-anim style="margin:10px 0 clamp(16px,2vw,28px)">Click a card.</p>
+    <div class="flipgrid">
+      <div class="flip" data-anim><div class="in3d">
+        <div class="face front"><span class="lbl">Pre-reads</span><div class="txt">You read before, or you are dead weight</div><span class="cue">click</span></div>
+        <div class="face back"><span class="lbl">Reality</span><div class="txt"><span class="todo">[ hours of pre-work ]</span></div><span class="cue">Chen to fill</span></div>
+      </div></div>
+      <div class="flip" data-anim><div class="in3d">
+        <div class="face front"><span class="lbl">Cold call</span><div class="txt">Your name, then a question, in front of 130 people</div><span class="cue">click</span></div>
+        <div class="face back"><span class="lbl">Reality</span><div class="txt"><span class="todo">[ did it happen to you? ]</span></div><span class="cue">Chen to fill</span></div>
+      </div></div>
+      <div class="flip" data-anim><div class="in3d">
+        <div class="face front"><span class="lbl">Graded quiz</span><div class="txt">Before the first class, not after the last</div><span class="cue">click</span></div>
+        <div class="face back"><span class="lbl">Reality</span><div class="txt"><span class="todo">[ how hard ]</span></div><span class="cue">Chen to fill</span></div>
+      </div></div>
+      <div class="flip" data-anim><div class="in3d">
+        <div class="face front"><span class="lbl">Team output</span><div class="txt">Deliverables due the same night, every night</div><span class="cue">click</span></div>
+        <div class="face back"><span class="lbl">Reality</span><div class="txt"><span class="todo">[ how late did you sleep ]</span></div><span class="cue">Chen to fill</span></div>
+      </div></div>
+      <div class="flip" data-anim><div class="in3d">
+        <div class="face front"><span class="lbl">The professor</span><div class="txt">Not a lecturer. A referee who keeps score</div><span class="cue">click</span></div>
+        <div class="face back"><span class="lbl">Reality</span><div class="txt"><span class="todo">[ a professor line you still quote ]</span></div><span class="cue">Chen to fill</span></div>
+      </div></div>
+      <div class="flip" data-anim><div class="in3d">
+        <div class="face front"><span class="lbl">English</span><div class="txt">The real bar is lower than you fear. But it is not zero</div><span class="cue">click</span></div>
+        <div class="face back"><span class="lbl">Reality</span><div class="txt"><span class="todo">[ your honest read on the language bar ]</span></div><span class="cue">Chen to fill</span></div>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 11 MY TEAM ============ -->
+<section class="slide" data-title="My team">
+  <div class="wrap">
+    <div class="kicker" data-anim>People, part one</div>
+    <h2 data-anim style="max-width:24ch">Five strangers, five passports, <span class="grad">one deadline.</span></h2>
+    <p class="lead" data-anim style="margin:12px 0 clamp(18px,2.2vw,32px)">You do not pick your team. That is the point.</p>
+    <div class="wall">
+      <div class="person" data-anim><div class="ph">1</div><div class="info"><div class="nm"><span class="todo">Name</span></div><div class="rl"><span class="todo">country &middot; industry &middot; role</span></div></div></div>
+      <div class="person" data-anim><div class="ph">2</div><div class="info"><div class="nm"><span class="todo">Name</span></div><div class="rl"><span class="todo">country &middot; industry &middot; role</span></div></div></div>
+      <div class="person" data-anim><div class="ph">3</div><div class="info"><div class="nm"><span class="todo">Name</span></div><div class="rl"><span class="todo">country &middot; industry &middot; role</span></div></div></div>
+      <div class="person" data-anim><div class="ph">4</div><div class="info"><div class="nm"><span class="todo">Name</span></div><div class="rl"><span class="todo">country &middot; industry &middot; role</span></div></div></div>
+      <div class="person" data-anim><div class="ph">CG</div><div class="info"><div class="nm">Chen Gao</div><div class="rl">China &middot; logistics infrastructure &middot; data &amp; AI</div></div></div>
+    </div>
+    <div class="todo-block" data-anim style="margin-top:clamp(16px,2vw,26px)">[ Chen: names, countries, industries &mdash; and a team photo if you have one. Also: the one moment the team nearly fell apart, and what fixed it. ]</div>
+  </div>
+</section>
+
+<!-- ============ 12 ONE CLASSMATE ============ -->
+<section class="slide" data-title="One classmate">
+  <div class="wrap">
+    <div class="split">
+      <div class="stack">
+        <div class="kicker" data-anim>People, part two</div>
+        <h2 data-anim>One person I will <span class="grad">still know in ten years</span></h2>
+        <div class="todo-block" data-anim>[ Chen: one classmate, told properly. Who they are, what they do, the conversation you had, and the one sentence of theirs you wrote down. Specific beats impressive &mdash; a PhD from Harvard Medical School is a credential; what they said to you at 11pm is a story. ]</div>
+        <p class="small" data-anim>Last year&rsquo;s cohort: PhDs from Harvard Medical School, founders, operators from pharma, consumer goods, education and finance across four continents. Roughly the same mix this year.</p>
+      </div>
+      <div class="ph-slot" data-anim style="min-height:clamp(220px,32vh,420px)">[ photo slot &mdash; you and this person, or them in class ]</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 13 LOW EGO, HIGH IMPACT ============ -->
+<section class="slide statement" data-title="Low ego, high impact">
+  <div class="wrap" style="text-align:center">
+    <div class="kicker" data-anim style="justify-content:center">The two lines you will hear all week</div>
+    <div class="huge" data-anim><span>Low ego.</span><span class="b">High impact.</span></div>
+    <p class="lead" data-anim style="margin:clamp(22px,2.8vw,42px) auto 0;text-align:center">
+      Every school has a slogan. This one is unusual in that the room actually behaves like it.
+    </p>
+    <div class="todo-block" data-anim style="max-width:70ch;margin:clamp(16px,2vw,26px) auto 0;text-align:left">[ Chen: one small moment that proves it &mdash; a senior person doing something unglamorous, someone helping a stranger, a CEO carrying chairs. Small and true is what lands. ]</div>
+  </div>
+</section>
+
+<!-- ============ 14 NETWORKING, THE REAL VERSION ============ -->
+<section class="slide" data-title="Networking, the real version">
+  <div class="wrap">
+    <div class="kicker" data-anim>What &ldquo;networking&rdquo; actually looked like</div>
+    <h2 data-anim style="max-width:26ch">Nobody exchanged a business card. <span class="grad">Everyone exchanged a problem.</span></h2>
+    <div class="mosaic" style="margin-top:clamp(16px,2.2vw,32px)">
+      <figure class="m-w2 m-h2" data-anim>
+        <img src="assets/img/cohort-group-photo.jpg" alt="The full Global Network Week cohort in purple T-shirts on the Global Hub steps">
+        <figcaption>130+ of us, one banner, Global Hub steps</figcaption>
+      </figure>
+      <div class="ph-slot" data-anim>[ Late Lounge / evening bar ]</div>
+      <div class="ph-slot" data-anim>[ the boat cruise ]</div>
+      <div class="ph-slot" data-anim>[ breakfast table talk ]</div>
+      <div class="ph-slot" data-anim>[ breakout room, whiteboard ]</div>
+    </div>
+    <p class="small" data-anim style="margin-top:clamp(12px,1.6vw,22px)">On-campus events, continuous group work, the Late Lounge every night, a cruise on the lake. <span class="todo">[ Chen: the single best conversation of the week &mdash; where were you standing? ]</span></p>
+  </div>
+</section>
+
+<!-- ============ 15 EVANSTON, FULL BLEED ============ -->
+<section class="slide bleed" data-title="Evanston">
+  <div class="bg"><img src="assets/img/hub-lagoon-reeds.jpg" alt="The Kellogg Global Hub seen across the lagoon"></div>
+  <div class="veil"></div>
+  <div class="inner">
+    <div class="kicker" data-anim>Evanston, Illinois</div>
+    <h2 data-anim style="max-width:20ch">A glass building on a lake, twenty minutes from <span class="grad">the Loop.</span></h2>
+    <p class="lead" data-anim style="margin-top:14px">Sarah, from last year&rsquo;s cohort, called it &ldquo;an Arcadia of learning.&rdquo; She was not exaggerating. <span class="todo">[ Chen: one sensory detail &mdash; the light at 7pm, the wind off the lake, the walk to class ]</span></p>
+  </div>
+</section>
+
+<!-- ============ 16 WHAT I BROUGHT BACK ============ -->
+<section class="slide" data-title="What I brought back">
+  <div class="wrap">
+    <div class="kicker" data-anim>The return flight</div>
+    <h2 data-anim style="max-width:22ch">Three things went into the <span class="grad">carry-on</span></h2>
+    <div class="grid3" style="margin-top:clamp(22px,2.8vw,44px)">
+      <div class="card" data-anim>
+        <span class="n">01 &mdash; A way of thinking</span>
+        <h3><span class="todo">[ the reframe ]</span></h3>
+        <p><span class="todo">[ Chen: one belief you held on 1 August that you no longer hold ]</span></p>
+      </div>
+      <div class="card" data-anim>
+        <span class="n">02 &mdash; A method I now use</span>
+        <h3><span class="todo">[ the tool ]</span></h3>
+        <p><span class="todo">[ Chen: something concrete you have already applied at GLP &mdash; a meeting you ran differently, a negotiation you reopened ]</span></p>
+      </div>
+      <div class="card" data-anim>
+        <span class="n">03 &mdash; A set of people</span>
+        <h3><span class="todo">[ the network, made specific ]</span></h3>
+        <p><span class="todo">[ Chen: who have you actually messaged since coming home, and about what? ]</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 17 SIX HONEST TRUTHS ============ -->
+<section class="slide" data-title="Six honest things">
+  <div class="wrap">
+    <div class="kicker" data-anim>If you are thinking about applying</div>
+    <h2 data-anim style="max-width:22ch">Six honest things, <span class="grad">no brochure language</span></h2>
+    <div class="truths" style="margin-top:clamp(18px,2.4vw,34px)">
+      <div class="truth" data-anim><div class="i">01</div><div><div class="t">How good does your English really need to be?</div><div class="s"><span class="todo">[ Chen: the honest bar. This is the number one silent worry in the audience. ]</span></div></div></div>
+      <div class="truth" data-anim><div class="i">02</div><div><div class="t">How much time does the week actually cost you?</div><div class="s"><span class="todo">[ pre-work hours + travel + the week itself + recovery ]</span></div></div></div>
+      <div class="truth" data-anim><div class="i">03</div><div><div class="t">What to do in the first hour on campus</div><div class="s"><span class="todo">[ your tactical advice &mdash; who to sit next to, what to say ]</span></div></div></div>
+      <div class="truth" data-anim><div class="i">04</div><div><div class="t">The mistake I made that you can avoid</div><div class="s"><span class="todo">[ this one earns more trust than any other slide ]</span></div></div></div>
+      <div class="truth" data-anim><div class="i">05</div><div><div class="t">Who should <em class="it">not</em> come</div><div class="s"><span class="todo">[ saying this out loud is what makes the rest credible ]</span></div></div></div>
+      <div class="truth" data-anim><div class="i">06</div><div><div class="t">Was it worth it?</div><div class="s"><span class="todo">[ your answer, in one sentence, with no hedging ]</span></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 18 CLOSING ============ -->
+<section class="slide" data-title="Welcome to GK">
+  <div class="wrap">
+    <div class="close-grid">
+      <div class="stack">
+        <div class="kicker" data-anim>Last thing</div>
+        <h2 data-anim style="max-width:20ch">Come with curiosity.<br>Leave with a <span class="grad">global family.</span></h2>
+        <p class="lead" data-anim>One year in, one week in Evanston, and the map on slide three stopped being a map. It became a list of people I can call.</p>
+        <div class="rule" style="width:72px;height:2px;background:var(--gk);margin:8px 0" data-anim></div>
+        <p class="small" data-anim>
+          <b style="color:var(--text)">Chen Gao &middot; 高晨</b><br>
+          Guanghua&ndash;Kellogg EMBA, GK12<br>
+          VP, Big Data &amp; AI, GLP<br>
+          <span class="todo">[ WeChat / email to display ]</span>
+        </p>
+      </div>
+      <div class="stack" style="align-items:flex-end">
+        <div class="qr" data-anim>[ WeChat QR<br>or GK admissions QR ]</div>
+        <p class="small" data-anim style="text-align:right">Questions &mdash; ask me anything.<br>Especially the ones you think are too basic.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</div><!-- /deck -->
+
+<div id="nav">
+  <button class="nbtn" id="prev" aria-label="Previous slide">&#8592;</button>
+  <button class="nbtn" id="next" aria-label="Next slide">&#8594;</button>
+  <button class="nbtn" id="ovbtn" aria-label="Slide overview">&#9638;</button>
+</div>
+<div id="meta"><span id="cur">1</span> / <span id="tot">18</span></div>
+<div id="hint"><kbd>&#8594;</kbd> next &nbsp; <kbd>O</kbd> overview &nbsp; <kbd>F</kbd> fullscreen</div>
+
+<div id="ov" aria-hidden="true">
+  <h4>All slides &mdash; click to jump &nbsp;&middot;&nbsp; Esc to close</h4>
+  <div id="ovgrid"></div>
+</div>
+
+<script>
+(function(){
+  var slides = Array.prototype.slice.call(document.querySelectorAll('.slide'));
+  var i = 0;
+  var bar   = document.querySelector('#bar span');
+  var curEl = document.getElementById('cur');
+  var totEl = document.getElementById('tot');
+  var hint  = document.getElementById('hint');
+  var ov    = document.getElementById('ov');
+  var ovgrid= document.getElementById('ovgrid');
+  totEl.textContent = slides.length;
+
+  /* ---------- overview grid ---------- */
+  slides.forEach(function(s, n){
+    var b = document.createElement('button');
+    b.className = 'ovcard';
+    b.innerHTML = '<span class="i">' + String(n+1).padStart(2,'0') + '</span><span class="t">' +
+                  (s.dataset.title || 'Slide') + '</span>';
+    b.addEventListener('click', function(){ closeOv(); go(n); });
+    ovgrid.appendChild(b);
+  });
+  var ovcards = Array.prototype.slice.call(ovgrid.children);
+
+  /* ---------- count-up ---------- */
+  function countUp(el){
+    var target = parseInt(el.dataset.count, 10);
+    var dur = 1100, t0 = null;
+    function step(t){
+      if(!t0) t0 = t;
+      var p = Math.min(1, (t - t0) / dur);
+      var eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = Math.round(target * eased);
+      if(p < 1) requestAnimationFrame(step);
+    }
+    el.textContent = '0';
+    requestAnimationFrame(step);
+  }
+
+  /* ---------- map: arc lengths + travelling dots ---------- */
+  var arcs = Array.prototype.slice.call(document.querySelectorAll('#arcs .arc-draw'));
+  var travellers = document.getElementById('travellers');
+  arcs.forEach(function(p){
+    var len = p.getTotalLength();
+    p.style.setProperty('--len', len);
+    var c = document.createElementNS('http://www.w3.org/2000/svg','circle');
+    c.setAttribute('r','3.2');
+    c.setAttribute('class','travel');
+    travellers.appendChild(c);
+    p._dot = c;
+    p._len = len;
+  });
+  var mapRaf = null;
+  function runMap(){
+    var nodes = Array.prototype.slice.call(document.querySelectorAll('#nodes .node'));
+    nodes.forEach(function(n){ n.classList.remove('in'); });
+    arcs.forEach(function(a){ a.classList.remove('in'); a._dot.classList.remove('in'); });
+    nodes.forEach(function(n, k){
+      setTimeout(function(){ n.classList.add('in'); }, 220 + k * 190);
+    });
+    arcs.forEach(function(a, k){
+      setTimeout(function(){ a.classList.add('in'); a._dot.classList.add('in'); }, 1500 + k * 260);
+    });
+    var t0 = null;
+    cancelAnimationFrame(mapRaf);
+    function tick(t){
+      if(!t0) t0 = t;
+      var el = (t - t0) / 1000;
+      arcs.forEach(function(a, k){
+        var start = 1.5 + k * 0.26;
+        var p = (el - start) / 1.5;
+        if(p < 0 || p > 1){ a._dot.setAttribute('opacity', 0); return; }
+        a._dot.setAttribute('opacity', 1);
+        var pt = a.getPointAtLength(a._len * (1 - p));
+        a._dot.setAttribute('cx', pt.x);
+        a._dot.setAttribute('cy', pt.y);
+      });
+      if(el < 6) mapRaf = requestAnimationFrame(tick);
+    }
+    mapRaf = requestAnimationFrame(tick);
+  }
+
+  /* ?static=1 - freeze everything at its end state, for screenshots / PDF export */
+  var STATIC = /[?&]static/.test(location.search);
+
+  /* ---------- per-slide entrance ---------- */
+  function enter(s){
+    var items = Array.prototype.slice.call(s.querySelectorAll('[data-anim]'));
+    if(STATIC){
+      items.forEach(function(el){ el.classList.add('in'); });
+      s.querySelectorAll('[data-count]').forEach(function(el){ el.textContent = el.dataset.count; });
+      s.querySelectorAll('#nodes .node').forEach(function(n){ n.classList.add('in'); });
+      arcs.forEach(function(a){ a.classList.add('in'); a.style.strokeDashoffset = 0; });
+      return;
+    }
+    items.forEach(function(el){ el.classList.remove('in'); });
+    items.forEach(function(el, k){
+      setTimeout(function(){ el.classList.add('in'); }, 90 + k * 95);
+    });
+    s.querySelectorAll('[data-count]').forEach(function(el){
+      setTimeout(function(){ countUp(el); }, 320);
+    });
+    if(s.querySelector('#arcs')) setTimeout(runMap, 200);
+    s.querySelectorAll('[data-clip] video').forEach(function(v){
+      v.currentTime = 0;
+      var p = v.play();
+      if(p && p.catch) p.catch(function(){});
+    });
+    s.querySelectorAll('.flip').forEach(function(f){ f.classList.remove('flipped'); });
+  }
+  function leave(s){
+    s.querySelectorAll('video').forEach(function(v){ v.pause(); });
+  }
+
+  function go(n){
+    n = Math.max(0, Math.min(slides.length - 1, n));
+    if(n === i && slides[i].classList.contains('is-active')) return;
+    leave(slides[i]);
+    slides[i].classList.remove('is-active');
+    i = n;
+    slides[i].classList.add('is-active');
+    enter(slides[i]);
+    bar.style.width = ((i + 1) / slides.length * 100) + '%';
+    /* the cover carries its own lock-up - avoid two logos on screen */
+    document.getElementById('brand').classList.toggle('hidden', slides[i].classList.contains('cover'));
+    curEl.textContent = i + 1;
+    ovcards.forEach(function(c, k){ c.classList.toggle('cur', k === i); });
+    if(i > 0) hint.classList.add('gone');
+    if(history.replaceState) history.replaceState(null, '', '#' + (i + 1));
+  }
+
+  /* ---------- overview open/close ---------- */
+  function openOv(){ ov.classList.add('on'); ov.setAttribute('aria-hidden','false'); }
+  function closeOv(){ ov.classList.remove('on'); ov.setAttribute('aria-hidden','true'); }
+  document.getElementById('ovbtn').addEventListener('click', function(){
+    ov.classList.contains('on') ? closeOv() : openOv();
+  });
+
+  /* ---------- controls ---------- */
+  document.getElementById('next').addEventListener('click', function(e){ e.stopPropagation(); go(i+1); });
+  document.getElementById('prev').addEventListener('click', function(e){ e.stopPropagation(); go(i-1); });
+
+  document.addEventListener('keydown', function(e){
+    var k = e.key;
+    if(k === 'Escape'){ closeOv(); return; }
+    if(k === 'o' || k === 'O'){ ov.classList.contains('on') ? closeOv() : openOv(); return; }
+    if(k === 'f' || k === 'F'){
+      if(!document.fullscreenElement) document.documentElement.requestFullscreen();
+      else document.exitFullscreen();
+      return;
+    }
+    if(k === 'ArrowRight' || k === 'PageDown' || k === ' ' || k === 'Enter'){ e.preventDefault(); go(i+1); }
+    if(k === 'ArrowLeft'  || k === 'PageUp' || k === 'Backspace'){ e.preventDefault(); go(i-1); }
+    if(k === 'Home'){ go(0); }
+    if(k === 'End'){ go(slides.length-1); }
+  });
+
+  /* click to advance, except on interactive things */
+  document.getElementById('deck').addEventListener('click', function(e){
+    if(e.target.closest('.flip, video, a, button')) return;
+    go(i+1);
+  });
+
+  /* flip cards */
+  document.querySelectorAll('.flip').forEach(function(f){
+    f.addEventListener('click', function(){ f.classList.toggle('flipped'); });
+  });
+
+  /* touch swipe */
+  var x0 = null;
+  document.addEventListener('touchstart', function(e){ x0 = e.touches[0].clientX; }, {passive:true});
+  document.addEventListener('touchend', function(e){
+    if(x0 === null) return;
+    var dx = e.changedTouches[0].clientX - x0;
+    if(Math.abs(dx) > 55) go(dx < 0 ? i+1 : i-1);
+    x0 = null;
+  }, {passive:true});
+
+  /* deep link */
+  var start = parseInt((location.hash || '#1').slice(1), 10);
+  go(isNaN(start) ? 0 : start - 1);
+})();
+</script>
+</body>
+</html>
