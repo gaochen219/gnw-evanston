@@ -1,5 +1,8 @@
 # GNW Evanston 2026 — online sharing deck
 
+**Live:** https://gaochen219.github.io/gnw-evanston/
+
+
 HTML slide deck for the 25 Aug 2026 online sharing with prospective Guanghua–Kellogg EMBA students.
 
 - `index.html` — the whole deck, single file (CSS + JS inline)
