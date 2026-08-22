@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>GK LinkedIn banner</title>
+<style>
+/* ===========================================================
+   Guanghua-Kellogg EMBA LinkedIn banner
+
+   Rendered at 2x (3168 x 792), downsampled to 1584x396
+   (LinkedIn spec) and 1399x349 (matches the WHU example).
+
+   Construction copied from the Kellogg-WHU banner after
+   sampling it: the field is a VERTICAL gradient, near-constant
+   across the width, sitting at L 32-36 / S 43-63. Two vertical
+   photo slabs on the left, a thin line network, the lock-up top
+   right and the headline right-aligned beneath it.
+   Hues swapped to GK: Guanghua crimson at the top, Kellogg
+   purple at the bottom, so the lavender accent - which sits low
+   in the frame - lands on purple and stays legible.
+   =========================================================== */
+:root{
+  --W:3168px;
+  --H:792px;
+
+  --crimson:#B12D29;         /* Guanghua */
+  --purple:#4E2A84;          /* Kellogg / Northwestern */
+  --accent:#C9A8FF;          /* lavender */
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:var(--W);height:var(--H);overflow:hidden;background:#000}
+
+.banner{
+  position:relative;width:var(--W);height:var(--H);overflow:hidden;
+  font-family:Arial,"Helvetica Neue",Helvetica,sans-serif;
+}
+
+/* ---------- field: vertical crimson -> purple ---------- */
+.field{
+  position:absolute;inset:0;
+  background:linear-gradient(180deg,
+    #A5232E 0%,
+    #93244A 30%,
+    #74266C 62%,
+    #57297F 84%,
+    var(--purple) 100%);
+}
+
+/* ---------- the line network ---------- */
+.net{position:absolute;inset:0}
+.net line{stroke:rgba(255,255,255,.12);stroke-width:1.6}
+
+/* ---------- photo slabs ---------- */
+.slab{position:absolute;top:0;height:100%;overflow:hidden}
+.slab img{width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.18) brightness(.78)}
+/* duotone, tinted along the same axis as the field */
+.slab .tint{
+  position:absolute;inset:0;
+  background:linear-gradient(180deg,var(--crimson) 0%,#7A276E 58%,var(--purple) 100%);
+  mix-blend-mode:color;opacity:.95;
+}
+.slab .shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(24,6,20,.30),rgba(18,8,34,.44))}
+
+.slab-1{left:0;width:17.7%}
+/* slab 2 carries the slight diagonal into the field, as in the example */
+.slab-2{left:17.7%;width:16.4%;clip-path:polygon(0 0, 100% 0, 82% 100%, 0 100%)}
+
+.seam{position:absolute;top:0;height:100%;width:2px;background:rgba(255,255,255,.28)}
+
+/* ---------- lock-up ---------- */
+.logo{position:absolute;top:7%;right:3.8%;height:23.5%}
+.logo img{height:100%;width:auto;display:block}
+
+/* ---------- headline ---------- */
+.headline{
+  position:absolute;right:3.8%;bottom:15.5%;
+  font-size:104px;line-height:1;font-weight:700;letter-spacing:-.005em;
+  color:#fff;white-space:nowrap;
+}
+.headline .accent{color:var(--accent)}
+</style>
+</head>
+<body>
+<div class="banner">
+  <div class="field"></div>
+
+  <svg class="net" viewBox="0 0 3168 792" preserveAspectRatio="none">
+    <line x1="1450" y1="430" x2="1010" y2="-40"/>
+    <line x1="1450" y1="430" x2="1330" y2="-40"/>
+    <line x1="1450" y1="430" x2="1720" y2="-40"/>
+    <line x1="1450" y1="430" x2="3220" y2="150"/>
+    <line x1="1450" y1="430" x2="2980" y2="830"/>
+    <line x1="1450" y1="430" x2="1960" y2="830"/>
+    <line x1="1450" y1="430" x2="1120" y2="830"/>
+    <line x1="1450" y1="430" x2="640"  y2="620"/>
+    <line x1="2280" y1="-40" x2="3220" y2="640"/>
+  </svg>
+
+  <!-- left slab: Kellogg, Evanston -->
+  <div class="slab slab-1">
+    <img src="../assets/img/hub-lagoon-reeds.jpg" alt="">
+    <div class="tint"></div><div class="shade"></div>
+  </div>
+  <!-- right slab: Guanghua / PKU campus goes here once Chen supplies it -->
+  <div class="slab slab-2">
+    <img src="../assets/img/hub-panorama-rock.jpg" alt="">
+    <div class="tint"></div><div class="shade"></div>
+  </div>
+  <div class="seam" style="left:17.7%"></div>
+
+  <div class="logo"><img src="../assets/img/gk-logo-white.png" alt="Kellogg Guanghua Executive MBA Global Network"></div>
+
+  <div class="headline">Executive MBA <span class="accent">Class of 2027</span></div>
+</div>
+</body>
+</html>
