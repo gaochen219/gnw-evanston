@@ -293,7 +293,12 @@ blockquote cite{
 /* GK gradient sits behind the media so a blocked autoplay never leaves a black plate */
 .bleed .bg{position:absolute;inset:0;z-index:0;overflow:hidden;background:linear-gradient(140deg,var(--purple-deep),var(--ink) 58%,var(--crimson-deep))}
 .bleed .bg img,.bleed .bg video{width:100%;height:100%;object-fit:cover}
-.bleed .veil{position:absolute;inset:0;z-index:1;background:linear-gradient(to top,rgba(10,7,16,.92),rgba(10,7,16,.22) 55%,rgba(10,7,16,.44))}
+.bleed .veil{
+  position:absolute;inset:0;z-index:1;
+  background:
+    linear-gradient(to right,rgba(8,5,13,.88) 0%,rgba(8,5,13,.62) 34%,rgba(8,5,13,.18) 64%,rgba(8,5,13,.06) 82%,rgba(8,5,13,.24) 100%),
+    linear-gradient(to top,rgba(8,5,13,.94) 0%,rgba(8,5,13,.40) 46%,rgba(8,5,13,.04) 74%,rgba(8,5,13,.34) 100%);
+}
 .bleed .inner{position:relative;z-index:2;padding:var(--pad);padding-bottom:clamp(58px,6.6vw,96px)}
 
 /* ---------------- 17 truths ---------------- */
@@ -703,7 +708,7 @@ blockquote cite{
       </div></div>
       <div class="flip" data-anim><div class="in3d">
         <div class="face front"><span class="lbl">Team output</span><div class="txt">Deliverables due the same night, every night</div><span class="cue">click</span></div>
-        <div class="face back"><span class="lbl">Reality</span><div class="txt">This is what cost me the evenings. See mistake 04.</div><span class="cue">every night</span></div>
+        <div class="face back"><span class="lbl">Reality</span><div class="txt">One to two hours most evenings, and it is what cost me the late lounge. See mistake 04.</div><span class="cue">every night</span></div>
       </div></div>
       <div class="flip" data-anim><div class="in3d">
         <div class="face front"><span class="lbl">The professor</span><div class="txt">Not a lecturer. A referee who keeps score</div><span class="cue">click</span></div>
@@ -874,8 +879,8 @@ blockquote cite{
     <div class="truths" style="margin-top:clamp(18px,2.4vw,34px)">
       <div class="truth" data-anim><div class="i">01</div><div><div class="t">Your English is probably fine. That was never the bar.</div><div class="s">Understanding the room is not the same as being in it. The bar is whether you will speak &mdash; whether you push into a discussion running in five accents at once instead of nodding along. A classroom that genuinely fuses cultures from all over the world is rare, and it only pays you back if you get in.</div></div></div>
       <div class="truth" data-anim><div class="i">02</div><div><div class="t">The load is attention, not language.</div><div class="s">Full days, back to back. You are listening hard to the professor and just as hard to 130 classmates arguing, all day, for eight days. That sustained concentration is the real cost &mdash; far more than the English.</div></div></div>
-      <div class="truth" data-anim><div class="i">03</div><div><div class="t">Raise your hand on day one. Get it over with.</div><div class="s">Speak in the first session, before the room has settled into who talks and who does not. Once you have said something out loud, the rest of the eight days is easy. Wait until Wednesday and you will still be waiting on Friday.</div></div></div>
-      <div class="truth" data-anim><div class="i">04</div><div><div class="t">My mistake: I optimised for the assignments</div><div class="s">Jet lag plus doing the homework properly meant I skipped the evening drinks. Operations had just spent two days teaching us that every choice is a trade-off &mdash; and I made this one without ever admitting to myself that I was making it. The coursework was gradeable. The other thing was not. Do the reading on the plane.</div></div></div>
+      <div class="truth" data-anim><div class="i">03</div><div><div class="t">Raise your hand on day one. Get it over with.</div><div class="s">Speak in the first session, before the room settles into who talks and who does not. Once you have said something out loud the rest of the week is easy; wait until Wednesday and you will still be waiting on Friday. Cheaper still: the cohorts open a group chat weeks before anyone flies. Introduce yourself there and you land already knowing faces.</div></div></div>
+      <div class="truth" data-anim><div class="i">04</div><div><div class="t">My mistake: I optimised for the assignments</div><div class="s">Jet lag plus doing the homework properly meant I skipped the evening drinks. Operations had just spent two days teaching us that every choice is a trade-off &mdash; and I made this one without admitting to myself that I was making it. I am not the first: the tips the programme circulates from past cohorts say the same thing over and over, in blunter words. One alumnus met the person now putting him forward for a job &mdash; at the late lounge. Do the reading on the plane.</div></div></div>
       <div class="truth" data-anim><div class="i">05</div><div><div class="t">Who should <em class="it">not</em> come</div><div class="s">Anyone who cannot go dark for eight consecutive days. If you have to stay reachable, you will be physically present and functionally absent &mdash; and with the groups reshuffling every course, everyone notices.</div></div></div>
       <div class="truth" data-anim><div class="i">06</div><div><div class="t">Was it worth it? I signed up for four global electives.</div><div class="s">Four is the maximum you are allowed to take. That is my honest answer &mdash; I did not go home and write a reflection, I went home and booked the next four countries.</div></div></div>
     </div>
@@ -1009,6 +1014,21 @@ blockquote cite{
   /* ?static=1 - freeze everything at its end state, for screenshots / PDF export */
   var STATIC = /[?&]static/.test(location.search);
 
+  /* ---------- video start offset -------------------------------------
+     Several clips fade in from white, so frame zero is a blank plate.
+     Park every video a little way in, and do it as soon as metadata
+     lands so the paused poster frame is real footage too.
+     ------------------------------------------------------------------ */
+  function seekIn(v){
+    if(!isFinite(v.duration) || !v.duration) return;
+    var t = Math.min(1.4, v.duration * 0.15);
+    if(v.currentTime < t) { try { v.currentTime = t; } catch(e){} }
+  }
+  document.querySelectorAll('video').forEach(function(v){
+    if(v.readyState >= 1) seekIn(v);
+    else v.addEventListener('loadedmetadata', function(){ seekIn(v); });
+  });
+
   /* ---------- fit-to-viewport -------------------------------------------
      A live share can run in any window size. Rather than let a text-heavy
      slide get clipped, scale its content down like a real slide would.
@@ -1050,7 +1070,7 @@ blockquote cite{
     });
     if(s.querySelector('#arcs')) setTimeout(runMap, 200);
     s.querySelectorAll('video').forEach(function(v){
-      v.currentTime = 0;
+      seekIn(v);
       var p = v.play();
       if(p && p.catch) p.catch(function(){});
     });
