@@ -29,6 +29,18 @@ S 43–63. This one keeps that construction and swaps the hues to GK — Guanghu
 crimson at the top, Kellogg purple at the bottom — so the lavender accent, which
 sits low in the frame, lands on purple and stays legible.
 
-Left slab is the Kellogg Global Hub in Evanston; the right slab is reserved for
-a Guanghua / PKU campus photo, mirroring how the WHU banner pairs one campus
-from each school.
+Left slab is the Kellogg Global Hub in Evanston, right slab is the Boya Pagoda
+at Peking University — one campus from each school, mirroring how the WHU
+banner is built.
+
+## Photo credits
+
+| image | source | licence |
+| --- | --- | --- |
+| Kellogg Global Hub | Chen Gao, August 2026 | own photo |
+| Boya Pagoda, Peking University | [Huangdan2060 via Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Boya_Pagoda_at_Peking_University.jpg) | CC0 (public domain dedication) |
+
+The Boya Pagoda shot is CC0, so it carries no attribution or share-alike
+obligation — it is credited here as a courtesy. That was deliberate: this repo
+is public, and a share-alike photo would have pulled the whole banner under the
+same licence.
